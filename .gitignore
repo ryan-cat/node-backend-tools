@@ -1,0 +1,19 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+
+
+*.env*
+**/generated
+build/**
+dist/**
+
+.DS_Store
+
+**.log
