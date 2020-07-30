@@ -3,7 +3,7 @@
 ./scripts/package.sh
 yarn unlink
 cd build
-yarn link 
+yarn link
 cd ../example
-yarn link node-api-tools
+yarn link backend-tools
 cd ..
