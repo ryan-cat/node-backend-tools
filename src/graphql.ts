@@ -3,7 +3,7 @@ export interface IViewer {
   rawToken: string;
 }
 
-export interface Context {
+export interface GraphQLContext {
   req: any;
   viewer: IViewer;
 }

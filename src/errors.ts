@@ -1,5 +1,5 @@
 import { createError, ApolloError } from 'apollo-errors';
-import { ErrorInfo, formatError as formatApolloError, isInstance as isApolloErrorInstance } from 'apollo-errors';
+import { formatError as formatApolloError, isInstance as isApolloErrorInstance } from 'apollo-errors';
 import { GraphQLError } from 'graphql';
 
 export const AuthenticationError = createError('AuthenticationError', {
