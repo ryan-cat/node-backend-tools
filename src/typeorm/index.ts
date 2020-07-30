@@ -1,5 +1,5 @@
 import { SelectQueryBuilder, Brackets, OrderByCondition, WhereExpression, getMetadataArgsStorage, QueryFailedError } from 'typeorm';
-import { ListQueryParams, PageInfo } from './query';
+import { ListQueryParams, PageInfo } from '../query';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { ClassType } from 'type-graphql';
 

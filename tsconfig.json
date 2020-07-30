@@ -9,7 +9,7 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "sourceMap": false,
-    "outDir": "dist",
+    "noEmit": true,
     "rootDir": "./src",
     "declaration": true
   },

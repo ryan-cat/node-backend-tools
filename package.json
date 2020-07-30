@@ -1,12 +1,16 @@
 {
-  "name": "node-api-tools",
+  "name": "backend-tools",
   "version": "1.0.0",
   "description": "",
-  "main": "dist",
+  "main": "dist/index",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "ci": "tsc --p './tsconfig.json'",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "tsc --p './tsconfig.build.json'",
+    "package": "./scripts/package.sh",
+    "dev-link": "./scripts/link.sh"
   },
   "files": [
     "dist"
@@ -14,18 +18,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "exports": {
-    ".": "./dist/index.js",
-    "./errors": "./dist/errors.js"
-  },
   "dependencies": {
     "apollo-errors": "^1.9.0",
     "class-validator": "^0.12.2"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.7",
     "@types/node": "^14.0.26",
     "graphql": "^15.3.0",
+    "jest": "^26.2.1",
     "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.4",
     "type-graphql": "^1.0.0-rc.3",
     "typeorm": "^0.2.25",
     "typescript": "^3.9.7"
