@@ -22,7 +22,7 @@ describe('errors', () => {
     expect(isInstance(new AuthorizationError(''))).toBeTruthy();
     expect(isInstance(new AuthorizationActionError(''))).toBeTruthy();
     expect(isInstance(new APIError(''))).toBeTruthy();
-    expect(isInstance(new InternalServerError(''))).toBeTruthy();
+    expect(isInstance(new InternalServerError(''))).toBeFalsy();
   });
 
   it('should have correct message for user input error', () => {
