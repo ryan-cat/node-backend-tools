@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`errors should have correct message and data for validation error for item and action and data 1`] = `"user could not be create due to issues with the provided input."`;
+
+exports[`errors should have correct message and data for validation error for item and no action 1`] = `"user could not be saved due to issues with the provided input."`;
+
+exports[`errors should have correct message for api error 1`] = `"Sample message"`;
+
+exports[`errors should have correct message for authorization action error 1`] = `"You do not have permission to create."`;
+
+exports[`errors should have correct message for authorization error 1`] = `"Sample message"`;
+
+exports[`errors should have correct message for item not found error for item and action 1`] = `"The user could not be found to create."`;
+
+exports[`errors should have correct message for item not found error for item and no action 1`] = `"The user could not be found."`;
+
+exports[`errors should have correct message for user input error 1`] = `"Sample message"`;

@@ -31,7 +31,7 @@ export class ItemNotFoundError extends BaseError {
 export class UserInputError extends BaseError {
   private static DEFAULT_MESSAGE = 'The provided input is invalid.';
 
-  constructor(message: string) {
+  constructor(message: string = UserInputError.DEFAULT_MESSAGE) {
     const defaultConfig = { message: UserInputError.DEFAULT_MESSAGE };
 
     super('UserInputError', defaultConfig, defaultConfig);
@@ -56,7 +56,7 @@ export class ValidationError extends BaseError {
 export class AuthorizationError extends BaseError {
   private static DEFAULT_MESSAGE = 'You do not have permission to perform this task.';
 
-  constructor(message: string) {
+  constructor(message: string = AuthorizationError.DEFAULT_MESSAGE) {
     const defaultConfig = { message: AuthorizationError.DEFAULT_MESSAGE };
 
     super('AuthorizationError', defaultConfig, defaultConfig);
@@ -68,7 +68,7 @@ export class AuthorizationError extends BaseError {
 export class AuthorizationActionError extends BaseError {
   private static DEFAULT_MESSAGE = 'You do not have permission to perform this task.';
 
-  constructor(action: string) {
+  constructor(action: string = AuthorizationActionError.DEFAULT_MESSAGE) {
     const defaultConfig = { message: AuthorizationActionError.DEFAULT_MESSAGE };
 
     super('AuthorizationError', defaultConfig, defaultConfig);
@@ -80,22 +80,22 @@ export class AuthorizationActionError extends BaseError {
 export class InternalServerError extends BaseError {
   private static DEFAULT_MESSAGE = 'Oops! Something went wrong. Please try again.';
 
-  constructor(message: string = null) {
+  constructor(message: string = InternalServerError.DEFAULT_MESSAGE) {
     const defaultConfig = { message: InternalServerError.DEFAULT_MESSAGE };
     super('InternalServerError', defaultConfig, defaultConfig);
 
-    this.message = message || this.message;
+    this.message = message;
   }
 }
 
 export class APIError extends BaseError {
   private static DEFAULT_MESSAGE = 'The parameter configuration provided is invalid.';
 
-  constructor(message: string = null) {
+  constructor(message: string = APIError.DEFAULT_MESSAGE) {
     const defaultConfig = { message: APIError.DEFAULT_MESSAGE };
     super('APIError', defaultConfig, defaultConfig);
 
-    this.message = message || this.message;
+    this.message = message;
   }
 }
 
@@ -103,7 +103,7 @@ export const formatError = (error: GraphQLError, mask: boolean = true): GraphQLF
   const err = error?.originalError;
 
   let newError = formatApolloError(new InternalServerError());
-  if (isApolloErrorInstance(err) && !mask) {
+  if (isApolloErrorInstance(err)) {
     newError = formatApolloError(err);
   } else if (err && !isApolloErrorInstance(error) && !mask) {
     newError = formatApolloError(new InternalServerError(err.message));
