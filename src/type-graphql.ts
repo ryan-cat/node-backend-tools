@@ -1,5 +1,4 @@
 import { ClassType, ObjectType, Field, Int } from 'type-graphql';
-import { PageInfo } from './query';
 
 @ObjectType('PageInfo')
 export class PageInfoType {
