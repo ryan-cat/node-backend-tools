@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'ts-jest',
+  modulePathIgnorePatterns: ['dist', 'build'],
   collectCoverage: true,
   collectCoverageFrom: ['./src/**/*.ts'],
   reporters: ['default'],
