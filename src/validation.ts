@@ -1,4 +1,4 @@
-import { ValidationError } from './errors/errors';
+import { ValidationError } from './errors';
 
 export interface ValidationMessageOptions {
   item: string;
