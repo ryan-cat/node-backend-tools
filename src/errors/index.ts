@@ -1,13 +1,18 @@
-import { createError, ApolloError } from 'apollo-errors';
-import { formatError as formatApolloError, isInstance as isApolloErrorInstance } from 'apollo-errors';
-import { GraphQLError } from 'graphql';
-
-export const AuthenticationError = createError('AuthenticationError', {
-  message: 'You must be authenticated to access this data.'
-});
+import { ApolloError, formatError as formatApolloError, isInstance as isApolloErrorInstance } from 'apollo-errors';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
 class BaseError extends ApolloError {
   public data: { [key: string]: string[] };
+}
+
+export class AuthenticationError extends BaseError {
+  private static DEFAULT_MESSAGE = 'You must be authenticated to access this data.';
+
+  constructor() {
+    const defaultConfig = { message: AuthenticationError.DEFAULT_MESSAGE };
+
+    super('AuthenticationError', defaultConfig, defaultConfig);
+  }
 }
 
 export class ItemNotFoundError extends BaseError {
@@ -94,14 +99,22 @@ export class APIError extends BaseError {
   }
 }
 
-export const formatError = (error: GraphQLError, mask: boolean): any => {
-  const err = error.originalError;
+export const formatError = (error: GraphQLError, mask: boolean): GraphQLFormattedError<Record<string, any>> => {
+  const err = error?.originalError;
 
-  if (isApolloErrorInstance(err)) {
-    return formatApolloError(err);
+  let newError = formatApolloError(new InternalServerError());
+  if (isApolloErrorInstance(err) && !mask) {
+    newError = formatApolloError(err);
   } else if (err && !isApolloErrorInstance(error) && !mask) {
-    return formatApolloError(new InternalServerError(err.message));
-  } else {
-    return formatApolloError(new InternalServerError());
+    newError = formatApolloError(new InternalServerError(err.message));
   }
+
+  return {
+    message: newError.message,
+    locations: newError.locations,
+    extensions: {
+      data: newError.data,
+      timeThrown: newError.time_thrown
+    }
+  } as GraphQLFormattedError<Record<string, any>>;
 };
