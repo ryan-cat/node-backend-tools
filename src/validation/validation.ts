@@ -1,4 +1,5 @@
 import { ValidationError } from '../errors';
+import { Schema, ValidationErrorItem } from 'joi';
 
 export interface ValidationMessageOptions {
   item: string;
@@ -10,11 +11,16 @@ const defaultValidationOptions: ValidationMessageOptions = {
   action: 'saved'
 };
 
-export const getValidationError = (data: any = null, validationOptions: ValidationMessageOptions = defaultValidationOptions): ValidationError => {
-  return new ValidationError(validationOptions.item, validationOptions.action, data);
-};
+export const validate = <E>(
+  item: E,
+  validator: Schema,
+  validationOptions: ValidationMessageOptions = defaultValidationOptions,
+  throwError = true
+): ValidationError => {
+  if (validator == null) {
+    throw new Error('Provided validator is null.');
+  }
 
-export const validate = <E>(item: E, validator: any, validationOptions: ValidationMessageOptions = null, throwError = true): ValidationError => {
   const result = validator.validate(item, {
     language: {
       key: '{{label}} '
@@ -24,7 +30,7 @@ export const validate = <E>(item: E, validator: any, validationOptions: Validati
     allowUnknown: true
   });
 
-  if (result.error) {
+  if (result && result.error) {
     const data = {};
 
     result.error.details.forEach((detail) => {
@@ -38,17 +44,24 @@ export const validate = <E>(item: E, validator: any, validationOptions: Validati
       }
     });
 
+    const options = validationOptions || defaultValidationOptions;
+
     if (throwError) {
-      throw getValidationError(data, validationOptions);
+      throw new ValidationError(options.item, options.action, data);
     } else {
-      return getValidationError(data, validationOptions);
+      return new ValidationError(options.item, options.action, data);
     }
   }
 };
 
-export const validateAndReturn = <E>(item: E, validator: any = null, validationOptions: ValidationMessageOptions = null): ValidationError => {
-  return validate(item, validator, validationOptions, false);
-};
+export abstract class Validatable {
+  public validator: Schema;
+  public validationOptions: ValidationMessageOptions;
+
+  public validate = <E>(item: E, throwError = true) => {
+    return validate(item, this.validator, this.validationOptions, throwError);
+  };
+}
 
 export const mergeValidationErrors = (err1: ValidationError, err2: ValidationError, throwError = false): ValidationError => {
   let err = err1;
@@ -71,7 +84,7 @@ export const mergeValidationErrors = (err1: ValidationError, err2: ValidationErr
   }
 };
 
-export const customValidationMessages = (errors, map) => {
+export const customValidationMessages = (errors: ValidationErrorItem[], map: { [key: string]: string }): ValidationErrorItem[] => {
   errors.forEach((err) => {
     if (map[err.type]) {
       err.message = map[err.type];

@@ -2,8 +2,8 @@
   "name": "backend-tools",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index",
-  "types": "dist/index.d.ts",
+  "main": "index",
+  "types": "index.d.ts",
   "scripts": {
     "ci": "tsc --p './tsconfig.json'",
     "test": "jest",
@@ -24,10 +24,12 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.7",
+    "@types/joi": "^14.3.4",
     "@types/node": "^14.0.26",
     "apollo-server": "^2.16.1",
     "graphql": "^15.3.0",
     "jest": "^26.2.1",
+    "joi": "^17.1.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.4",
     "type-graphql": "^1.0.0-rc.3",
