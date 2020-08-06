@@ -24,7 +24,7 @@ export interface IConnection<T> {
 }
 
 export const ConnectionType = <T>(itemClass: ClassType<T>, name: string): IConnection<T> => {
-  @ObjectType(name)
+  @ObjectType(name + 'Connection')
   class ConnectionTypeClass implements IConnection<T> {
     @Field(() => [itemClass])
     edges: T[];
