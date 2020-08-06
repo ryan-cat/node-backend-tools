@@ -1,6 +1,5 @@
-import { ValidationMessageOptions } from './../../build/validation/validation.d';
 import { ValidationError } from './../errors/errors';
-import { validate, mergeValidationErrors, Validatable, customValidationMessages } from './index';
+import { validate, mergeValidationErrors, Validatable, customValidationMessages, ValidationMessageOptions } from './index';
 import * as validation from './validation';
 import * as joi from 'joi';
 
