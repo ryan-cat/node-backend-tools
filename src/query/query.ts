@@ -10,12 +10,11 @@ export interface ListQueryParams {
 }
 
 export interface ListOptions {
-  first?: number;
+  take?: number;
   skip?: number;
   search?: string;
   after?: string;
   before?: string;
-  last?: number;
 }
 
 export interface PageInfo {
@@ -25,29 +24,30 @@ export interface PageInfo {
   endCursor: string;
 }
 
+export const maxTake = 1000;
+
 ////////////////////////// LIST PARSING FUNCTIONS //////////////////////////
 
 export const getListQueryParams = (listOptions: ListOptions): ListQueryParams => {
-  const limitMax = 1000;
-
   if (!listOptions) {
     return {
-      take: limitMax,
+      take: maxTake,
       skip: 0,
       pageDirection: 'forward',
       search: ''
     };
   }
 
-  const forwardPaging = !!listOptions.first || !!listOptions.after;
-  const backwardPaging = !!listOptions.last || !!listOptions.before;
-  validatePageParams(listOptions, forwardPaging, backwardPaging);
+  if (!!listOptions.after && !!listOptions.before) {
+    throw new APIError('Cannot page forward and backwards at the same time.');
+  }
 
-  let take = forwardPaging ? listOptions.first : listOptions.last;
-  take = !take || take > limitMax || take < 0 ? limitMax : take;
+  const backwardPaging = !!listOptions.before;
+
+  const take = !listOptions.take || listOptions.take > maxTake || listOptions.take < 0 ? maxTake : listOptions.take;
   const skip = listOptions.skip ? Math.max(listOptions.skip, 0) : 0;
 
-  const cursor = forwardPaging ? listOptions.after : listOptions.before;
+  const cursor = listOptions.before || listOptions.after;
 
   return {
     take,
@@ -57,12 +57,4 @@ export const getListQueryParams = (listOptions: ListOptions): ListQueryParams =>
     decodedCursor: cursor && Buffer.from(cursor, 'base64').toString(),
     search: listOptions.search || ''
   };
-};
-
-const validatePageParams = (listOptions: ListOptions, forwardPaging: boolean, backwardPaging: boolean) => {
-  if (forwardPaging && backwardPaging) {
-    throw new APIError('Cannot page forward and backwards at the same time.');
-  } else if (listOptions.last && !listOptions.before) {
-    throw new APIError('When paging backwards, a before cursor is required.');
-  }
 };
