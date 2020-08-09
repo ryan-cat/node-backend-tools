@@ -1,15 +1,14 @@
-import { SelectQueryBuilder, Brackets, OrderByCondition, WhereExpression, getMetadataArgsStorage, QueryFailedError } from 'typeorm';
+import { SelectQueryBuilder, Brackets, OrderByCondition, WhereExpression, getMetadataArgsStorage } from 'typeorm';
 import { ListQueryParams, PageInfo } from '../query';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { ClassType } from 'type-graphql';
 
-export const isUniqueError = (err: QueryFailedError, key: string): boolean => {
-  return err.message.toLowerCase().includes(`unique constraint "${key.toLowerCase()}`);
+export const isUniqueError = (err: string, key: string): boolean => {
+  return err.toLowerCase().includes(`unique constraint "${key.toLowerCase()}`);
 };
 
 ////////////////////////// TYPESAFE DATABASE FUNCTIONS //////////////////////////
 
-export const column = <T>(model: ClassType<T>, key: keyof T): string => {
+export const column = <T>(model: new () => T, key: keyof T): string => {
   const columns = getMetadataArgsStorage()
     .columns.filter((x) => x.target === model && (x.options.name == key || x.propertyName == key))
     .map((x) => x.options.name || x.propertyName);
@@ -21,11 +20,11 @@ export const column = <T>(model: ClassType<T>, key: keyof T): string => {
   return columns[0];
 };
 
-export const table = <T>(model: ClassType<T>): string => {
+export const table = <T>(model: new () => T): string => {
   const tables = getMetadataArgsStorage().tables.filter((x) => x.target === model);
 
-  if (!tables || tables.length == 0) {
-    return model.toString().toLowerCase();
+  if (!tables || tables.length == 0 || !tables[0].name) {
+    return model.toString().toLowerCase().split(' ')[1];
   }
 
   return tables[0].name;
@@ -203,37 +202,38 @@ export const getManyWithPageInfo = async <T>(
 
 /////////////////////////////// DATABASE CONFIG ///////////////////////////////
 
-let databaseConfig: PostgresConnectionOptions = {
-  type: 'postgres',
-  entities: [process.env.DATABASE_ENTITIES || 'src/**/*Models.{ts,js}'],
-  synchronize: process.env.DATABASE_SYNCHRONIZE !== undefined ? process.env.DATABASE_SYNCHRONIZE === 'true' : false,
-  ssl:
-    process.env.DATABASE_SSL === 'true' || process.env.DATABASE_SSL === undefined
-      ? {
-          rejectUnauthorized: false
-        }
-      : undefined,
-  migrations: ['src/migrations/*.ts'],
-  cli: {
-    migrationsDir: 'src/migrations'
+export const databaseConfig = (): PostgresConnectionOptions => {
+  let config: PostgresConnectionOptions = {
+    type: 'postgres',
+    entities: [process.env.DATABASE_ENTITIES || 'src/**/*Models.js'],
+    synchronize: process.env.DATABASE_SYNCHRONIZE !== undefined ? process.env.DATABASE_SYNCHRONIZE === 'true' : false,
+    ssl:
+      process.env.DATABASE_SSL === 'true' || process.env.DATABASE_SSL === undefined
+        ? {
+            rejectUnauthorized: false
+          }
+        : undefined,
+    migrations: ['src/migrations/*.ts'],
+    cli: {
+      migrationsDir: 'src/migrations'
+    }
+  };
+
+  if (process.env.DATABASE_URL) {
+    config = {
+      ...config,
+      url: process.env.DATABASE_URL
+    };
+  } else {
+    config = {
+      ...config,
+      host: process.env.DATABASE_HOST,
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_DATABASE,
+      schema: process.env.DATABASE_SCHEMA || undefined,
+      port: !isNaN(+process.env.DATABASE_PORT) ? +process.env.DATABASE_PORT : 5432
+    };
   }
+  return config;
 };
-
-if (process.env.DATABASE_URL) {
-  databaseConfig = {
-    ...databaseConfig,
-    url: process.env.DATABASE_URL
-  };
-} else {
-  databaseConfig = {
-    ...databaseConfig,
-    host: process.env.DATABASE_HOST,
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_DATABASE,
-    schema: process.env.DATABASE_SCHEMA || undefined,
-    port: +process.env.DATABASE_PORT || 5432
-  };
-}
-
-export { databaseConfig };
