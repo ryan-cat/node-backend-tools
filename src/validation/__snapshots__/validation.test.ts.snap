@@ -2,39 +2,6 @@
 
 exports[`validate should validate and return error due to validation issues 1`] = `"Item could not be saved due to issues with the provided input."`;
 
-exports[`validate should validate and return error due to validation issues 2`] = `
-Object {
-  "email": Array [
-    "\\"email\\" must be a valid email.",
-  ],
-  "username": Array [
-    "\\"username\\" length must be less than or equal to 10 characters long.",
-  ],
-}
-`;
-
 exports[`validate should validate and throw error due to validation issues 1`] = `"Item could not be saved due to issues with the provided input."`;
 
-exports[`validate should validate and throw error due to validation issues 2`] = `
-Object {
-  "email": Array [
-    "Invalid email.",
-  ],
-  "username": Array [
-    "Username too long.",
-  ],
-}
-`;
-
 exports[`validate should validate and throw error due to validation issues with custom message options 1`] = `"User could not be created due to issues with the provided input."`;
-
-exports[`validate should validate and throw error due to validation issues with custom message options 2`] = `
-Object {
-  "email": Array [
-    "\\"email\\" must be a valid email.",
-  ],
-  "username": Array [
-    "\\"username\\" length must be less than or equal to 10 characters long.",
-  ],
-}
-`;

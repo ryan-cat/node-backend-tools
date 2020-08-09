@@ -19,7 +19,7 @@ class QueryType {
 }
 
 async function main() {
-  await createConnection(databaseConfig);
+  await createConnection(databaseConfig());
 
   const schema = await buildSchema({
     resolvers: [QueryType, PageInfoType],
