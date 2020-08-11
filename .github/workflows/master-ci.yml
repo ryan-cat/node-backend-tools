@@ -2,25 +2,28 @@ name: Master CI
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   ci:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["8", "10", "12", "14"]
 
     steps:
-    - uses: actions/checkout@v2
-      
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-      
-    - name: Install
-      run: yarn
-      
-    - name: Build
-      run: yarn build
+      - uses: actions/checkout@v2
 
-    - name: Test
-      run: yarn test --updateSnapshot
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - name: Test
+        run: yarn test --updateSnapshot

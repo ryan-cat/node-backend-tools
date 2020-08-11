@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./scripts/prepare.sh
+./scripts/package.sh
 yarn unlink
 cd build
 yarn link
