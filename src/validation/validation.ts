@@ -22,7 +22,7 @@ export const validate = <E>(
   }
 
   const result = validator.validate(item, {
-    language: {
+    messages: {
       key: '{{label}} '
     },
     convert: false,

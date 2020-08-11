@@ -11,22 +11,34 @@ describe('validate', () => {
 
   const schema: joi.Schema = joi.object();
 
-  const validationResult = {
+  const validationResult: joi.ValidationResult = {
+    value: null,
     error: {
+      name: 'ValidationError',
+      annotate: null,
+      message: '',
+      isJoi: true,
+      _object: null,
       details: [
         {
+          path: [],
+          type: '',
           context: {
             key: 'email'
           },
           message: 'Invalid email'
         },
         {
+          path: [],
+          type: '',
           context: {
             key: 'email'
           },
           message: 'Email too long'
         },
         {
+          path: [],
+          type: '',
           context: {
             key: 'username'
           },
@@ -56,7 +68,7 @@ describe('validate', () => {
   });
 
   it('should validate and return null for no issues', () => {
-    jest.spyOn(schema, 'validate').mockImplementationOnce(() => {});
+    jest.spyOn(schema, 'validate').mockImplementationOnce(() => null);
 
     const result = validate({}, schema);
     expect(result).toBeUndefined();
