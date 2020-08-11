@@ -11,8 +11,7 @@
     "build": "tsc --p './tsconfig.build.json'",
     "prepare": "./scripts/prepare.sh",
     "dev-link": "./scripts/link.sh",
-    "deploy": "cd build && yarn publish",
-    "cm": "git-cz"
+    "deploy": "cd build && yarn publish"
   },
   "files": [
     "dist"
@@ -22,24 +21,17 @@
   "license": "ISC",
   "dependencies": {
     "apollo-errors": "^1.9.0",
-    "class-validator": "^0.12.2",
-    "cz-conventional-changelog": "^3.2.0"
+    "class-validator": "^0.12.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
-    "@commitlint/prompt-cli": "^9.1.1",
     "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
-    "@semantic-release/github": "^7.0.7",
-    "@semantic-release/npm": "^7.0.5",
-    "@semantic-release/release-notes-generator": "^9.0.1",
     "@types/jest": "^26.0.7",
     "@types/joi": "^14.3.4",
     "@types/node": "^14.0.26",
     "apollo-server": "^2.16.1",
-    "commitizen": "^4.1.2",
     "firebase-admin": "^9.0.0",
     "graphql": "^15.3.0",
     "husky": "^4.2.5",
@@ -60,13 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
