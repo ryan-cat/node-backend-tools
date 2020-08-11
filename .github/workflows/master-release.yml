@@ -18,8 +18,8 @@ jobs:
       - name: Install
         run: yarn
 
-      - name: Prepare
-        run: yarn prepare
+      - name: Package
+        run: yarn package
 
       - name: Release
         run: yarn release
