@@ -1,4 +1,4 @@
-name: Master CI
+name: Master Release
 
 on: workflow_dispatch
 
