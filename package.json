@@ -9,7 +9,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc --p './tsconfig.build.json'",
-    "package": "./scripts/package.sh",
+    "prepare": "./scripts/prepare.sh",
     "dev-link": "./scripts/link.sh",
     "deploy": "cd build && yarn publish",
     "cm": "git-cz"
