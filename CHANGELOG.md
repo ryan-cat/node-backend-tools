@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.2...v1.0.3) (2020-08-12)
+
+
+### Bug Fixes
+
+* firebase not included in index of build ([bf57f25](https://github.com/ryan-cat/rmc-backend-tools/commit/bf57f2534c90cd152314656b53a89388408f90aa))
+
 ## [1.0.2](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.1...v1.0.2) (2020-08-12)
 
 
