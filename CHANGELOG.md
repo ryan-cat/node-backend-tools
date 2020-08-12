@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.1...v1.0.2) (2020-08-12)
+
+
+### Bug Fixes
+
+* code not publishing ([8f7025b](https://github.com/ryan-cat/rmc-backend-tools/commit/8f7025bdda232b1fedc7ff5d3cb13ba2148c6342))
+
 # 1.0.0 (2020-08-12)
 
 ### Features
