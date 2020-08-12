@@ -1971,10 +1971,10 @@ rimraf@^2.6.1:
   dependencies:
     glob "^7.1.3"
 
-rmc-backend-tools@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/rmc-backend-tools/-/rmc-backend-tools-0.1.0.tgz#c53ede2bb7cf21ce31d3e6ce534855d92bbc276d"
-  integrity sha512-IfOKMwVel+DWmeTcK98yhp1XsJiJ97shg/DaUmjyUBwXg91uPdgnPq4ZhLerL+reCIJJT/p4MPkbej6Eez2SHg==
+rmc-backend-tools@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/rmc-backend-tools/-/rmc-backend-tools-1.0.0.tgz#cbd99fd0aeac7bdb54ba8bee872f4a7370cc7693"
+  integrity sha512-YPAgWV9+xYaUgH970qBSEeeLdUHsWuz0KdDpqw0et+B8on1ENAES7nJH33Xq6i2eKxzr3q66T30+lyeFkXmzbA==
   dependencies:
     apollo-errors "^1.9.0"
     class-validator "^0.12.2"
