@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
 import { createConnection } from 'typeorm';
-import { databaseConfig, formatError, PageInfoType, PageInfo } from 'backend-tools';
+import { databaseConfig, formatError, PageInfoType, PageInfo } from 'rmc-backend-tools';
 import { buildSchema, Query, Resolver } from 'type-graphql';
 import { GraphQLError } from 'graphql';
 
