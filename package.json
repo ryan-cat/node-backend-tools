@@ -1,16 +1,16 @@
 {
   "name": "rmc-backend-tools",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "",
-  "main": "index",
-  "types": "index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "ci": "tsc --p './tsconfig.json'",
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc --p './tsconfig.build.json'",
     "package": "./scripts/package.sh",
-    "release": "npx semantic-release",
+    "release": "npx semantic-release --ci=false",
     "dev-link": "./scripts/link.sh"
   },
   "files": [
