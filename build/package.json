@@ -1,8 +1,8 @@
 {
   "name": "rmc-backend-tools",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "",
-  "main": "index",
+  "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "ci": "tsc --p './tsconfig.json'",
@@ -14,7 +14,7 @@
     "dev-link": "./scripts/link.sh"
   },
   "files": [
-    "dist"
+    "build"
   ],
   "keywords": [],
   "author": "",

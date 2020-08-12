@@ -2,19 +2,19 @@
   "name": "rmc-backend-tools",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
     "ci": "tsc --p './tsconfig.json'",
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc --p './tsconfig.build.json'",
     "package": "./scripts/package.sh",
-    "release": "cd build && npx semantic-release --ci=false",
+    "release": "npx semantic-release --ci=false",
     "dev-link": "./scripts/link.sh"
   },
   "files": [
-    "dist"
+    "build"
   ],
   "keywords": [],
   "author": "",
@@ -49,10 +49,5 @@
     "graphql": "^15.3.0",
     "type-graphql": "^1.0.0-rc.3",
     "typeorm": "^0.2.25"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   }
 }
