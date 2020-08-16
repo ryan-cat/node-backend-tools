@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.3...v1.0.4) (2020-08-16)
+
+
+### Bug Fixes
+
+* remove uneeded utils ([b08ed80](https://github.com/ryan-cat/rmc-backend-tools/commit/b08ed800b02b5c945cec43e9d94edb48588a71ab))
+* updated validation interfaces to work with joi ([03ed4fe](https://github.com/ryan-cat/rmc-backend-tools/commit/03ed4fee3e8a6a5c9b7c4a210cabaf5b388d9309))
+
 ## [1.0.3](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.2...v1.0.3) (2020-08-12)
 
 
