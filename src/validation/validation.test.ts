@@ -185,9 +185,9 @@ describe('merge validation errors', () => {
 
 describe('custom validation errors', () => {
   it('should replace default error message with custom error message', () => {
-    const errors: joi.ValidationErrorItem[] = [
-      { type: 'maxlength', message: 'The length of the item is too long.', path: [] },
-      { type: 'minlength', message: 'The length of the item is too short.', path: [] }
+    const errors = [
+      { code: 'maxlength', message: 'The length of the item is too long.', path: [] },
+      { code: 'minlength', message: 'The length of the item is too short.', path: [] }
     ];
 
     const map = {
