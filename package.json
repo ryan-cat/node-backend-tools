@@ -49,5 +49,10 @@
     "graphql": "^15.3.0",
     "type-graphql": "^1.0.0-rc.3",
     "typeorm": "^0.2.25"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
