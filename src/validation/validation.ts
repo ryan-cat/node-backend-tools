@@ -1,5 +1,5 @@
 import { ValidationError } from '../errors';
-import { Schema, ValidationErrorItem } from 'joi';
+import { Schema } from 'joi';
 
 export interface ValidationMessageOptions {
   item: string;
@@ -84,10 +84,15 @@ export const mergeValidationErrors = (err1: ValidationError, err2: ValidationErr
   }
 };
 
-export const customValidationMessages = (errors: ValidationErrorItem[], map: { [key: string]: string }): ValidationErrorItem[] => {
+interface ErrorItem {
+  code: string;
+  message: string;
+}
+
+export const customValidationMessages = (errors: ErrorItem[], map: { [key: string]: string }): any => {
   errors.forEach((err) => {
-    if (map[err.type]) {
-      err.message = map[err.type];
+    if (map[err.code]) {
+      err.message = map[err.code];
     }
   });
 
