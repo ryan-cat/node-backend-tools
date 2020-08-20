@@ -22,8 +22,11 @@ export const validate = <E>(
   }
 
   const result = validator.validate(item, {
-    messages: {
-      key: '{{label}} '
+    errors: {
+      wrap: {
+        label: ''
+      },
+      label: 'key'
     },
     convert: false,
     abortEarly: false,
@@ -31,6 +34,7 @@ export const validate = <E>(
   });
 
   if (result && result.error) {
+    console.log(result.error.details);
     const data = {};
 
     result.error.details.forEach((detail) => {
