@@ -1,3 +1,11 @@
+## [1.0.5](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.4...v1.0.5) (2020-08-20)
+
+
+### Bug Fixes
+
+* added error code to formatted error ([6979b27](https://github.com/ryan-cat/rmc-backend-tools/commit/6979b270aa09fcde56a3be94b7825d4efc9d9711))
+* changed validate method to format message correctly ([2b19211](https://github.com/ryan-cat/rmc-backend-tools/commit/2b19211304b4f20474ff47c06d79bbea073a5444))
+
 ## [1.0.4](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.3...v1.0.4) (2020-08-16)
 
 
