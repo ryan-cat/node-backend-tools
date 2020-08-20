@@ -113,6 +113,7 @@ export const formatError = (error: GraphQLError, mask: boolean = true): GraphQLF
     message: newError.message,
     locations: newError.locations,
     extensions: {
+      code: newError.name,
       data: newError.data,
       timeThrown: newError.time_thrown
     }
