@@ -116,6 +116,7 @@ describe('format error', () => {
     const formattedError = formatError(error, true);
 
     expect(formattedError.message).toBe(message);
+    expect(formattedError.extensions.code).toBe(originalError.name);
     expect(formattedError.extensions.data).toStrictEqual(data);
   });
 
@@ -131,6 +132,7 @@ describe('format error', () => {
     const formattedError = formatError(error, true);
 
     expect(formattedError.message).toBe(message);
+    expect(formattedError.extensions.code).toBe(originalError.name);
     expect(formattedError.extensions.data).toStrictEqual(data);
   });
 
