@@ -1,3 +1,13 @@
+## [1.0.6](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.5...v1.0.6) (2020-10-14)
+
+
+### Bug Fixes
+
+* accidentally left console.log ([ced79e9](https://github.com/ryan-cat/rmc-backend-tools/commit/ced79e9a96eafd6f3ac6ff34d1730bd7f2edb3b1))
+* accidentally left console.log ([417ffe3](https://github.com/ryan-cat/rmc-backend-tools/commit/417ffe34236aa36ce93659d72c73ac44aad22876))
+* corrected implementation of graphql connection type ([9d18b17](https://github.com/ryan-cat/rmc-backend-tools/commit/9d18b179aacfd133a49b1b35dc17d7200f99abaf))
+* corrected implementation of graphql connection type ([5829074](https://github.com/ryan-cat/rmc-backend-tools/commit/5829074a2d01720b35ec70e0657c391c5909b149))
+
 ## [1.0.5](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.4...v1.0.5) (2020-08-20)
 
 
