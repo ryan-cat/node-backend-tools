@@ -23,7 +23,7 @@ export interface IConnection<T> {
   count: number;
 }
 
-export const ConnectionType = <T>(itemClass: ClassType<T>, name: string): IConnection<T> => {
+export const ConnectionType = <T>(itemClass: ClassType<T>, name: string): new () => IConnection<T> => {
   @ObjectType(name + 'Connection')
   class ConnectionTypeClass implements IConnection<T> {
     @Field(() => [itemClass])
@@ -35,5 +35,5 @@ export const ConnectionType = <T>(itemClass: ClassType<T>, name: string): IConne
     @Field(() => Int)
     count: number;
   }
-  return new ConnectionTypeClass();
+  return ConnectionTypeClass;
 };
