@@ -34,7 +34,6 @@ export const validate = <E>(
   });
 
   if (result && result.error) {
-    console.log(result.error.details);
     const data = {};
 
     result.error.details.forEach((detail) => {
