@@ -2,7 +2,7 @@ import { ApolloError, formatError as formatApolloError, isInstance as isApolloEr
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
 class BaseError extends ApolloError {
-  public data: { [key: string]: string[] };
+  public data: any;
 }
 
 export class AuthenticationError extends BaseError {
@@ -40,10 +40,15 @@ export class UserInputError extends BaseError {
   }
 }
 
+export interface ValidationErrorItem {
+  field: (string | number)[];
+  error: string;
+}
+
 export class ValidationError extends BaseError {
   private static DEFAULT_MESSAGE = 'The item could not be saved due to issues with the provided input.';
 
-  constructor(item: string, action = 'saved', data: any = {}) {
+  constructor(item: string, action = 'saved', data: ValidationErrorItem[] = null) {
     const defaultConfig = { message: ValidationError.DEFAULT_MESSAGE };
 
     super('ValidationError', defaultConfig, defaultConfig);
