@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/ryan-cat/rmc-backend-tools/compare/v2.0.0...v2.1.0) (2020-10-27)
+
+
+### Features
+
+* added typing for validation error data ([c6d8e14](https://github.com/ryan-cat/rmc-backend-tools/commit/c6d8e149cac423c90fb212c7f7ab2e660d080c72))
+
 # [2.0.0](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.6...v2.0.0) (2020-10-27)
 
 
