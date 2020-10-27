@@ -51,9 +51,10 @@ describe('errors', () => {
   it('should have correct message and data for validation error for item and action and data', () => {
     const item = 'user';
     const action = 'create';
-    const data = {
-      field: 'name'
-    };
+    const data = [{
+      field: ['name'],
+      error: 'error'
+    }];
     const error = new ValidationError(item, action, data);
 
     expect(error.message).toMatchSnapshot();
