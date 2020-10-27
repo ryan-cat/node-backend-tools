@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.6...v2.0.0) (2020-10-27)
+
+
+### Features
+
+* reworked validation api ([27f9292](https://github.com/ryan-cat/rmc-backend-tools/commit/27f929230dda64c085e657f22a8b365cc6db161e))
+
+
+### Reverts
+
+* Revert "feat!: updated validation api to be more flexible and removed merge validations" ([9593f82](https://github.com/ryan-cat/rmc-backend-tools/commit/9593f827cf128df8b71842ca3ae44ed9c58a9b28))
+
+
+### BREAKING CHANGES
+
+* validation api is now different. merge validation function is removed.
+
 ## [1.0.6](https://github.com/ryan-cat/rmc-backend-tools/compare/v1.0.5...v1.0.6) (2020-10-14)
 
 
