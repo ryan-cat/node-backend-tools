@@ -34,17 +34,9 @@ export const validate = <E>(
   });
 
   if (result && result.error) {
-    const data = {};
-
-    result.error.details.forEach((detail) => {
-      const key = detail.context.key;
+    const data = result.error.details.map((detail) => {
       const message = detail.message.charAt(0).toUpperCase() + detail.message.slice(1) + '.';
-
-      if (!data[key]) {
-        data[key] = [message];
-      } else {
-        data[key] = [...data[key], message];
-      }
+      return { field: detail.path, error: message };
     });
 
     const options = validationOptions || defaultValidationOptions;
@@ -65,27 +57,6 @@ export abstract class Validatable {
     return validate(item, this.validator, this.validationOptions, throwError);
   };
 }
-
-export const mergeValidationErrors = (err1: ValidationError, err2: ValidationError, throwError = false): ValidationError => {
-  let err = err1;
-  if (!err1) {
-    err = err2;
-  } else if (err2) {
-    Object.keys(err2.data).forEach((key) => {
-      if (err1.data[key] && err1.data[key].length > 0) {
-        err.data[key] = [...err2.data[key], ...err1.data[key]];
-      } else {
-        err.data[key] = err2.data[key];
-      }
-    });
-  }
-
-  if (err && throwError) {
-    throw err;
-  } else {
-    return err;
-  }
-};
 
 interface ErrorItem {
   code: string;
