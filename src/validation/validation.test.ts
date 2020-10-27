@@ -1,5 +1,5 @@
 import { ValidationError } from './../errors/errors';
-import { validate, Validatable, customValidationMessages, ValidationMessageOptions } from './index';
+import { validate, mergeValidationErrors, Validatable, customValidationMessages, ValidationMessageOptions } from './index';
 import * as validation from './validation';
 import * as joi from 'joi';
 
@@ -21,7 +21,7 @@ describe('validate', () => {
       _object: null,
       details: [
         {
-          path: ['email'],
+          path: [],
           type: '',
           context: {
             key: 'email'
@@ -29,7 +29,7 @@ describe('validate', () => {
           message: 'Invalid email'
         },
         {
-          path: ['email'],
+          path: [],
           type: '',
           context: {
             key: 'email'
@@ -37,31 +37,21 @@ describe('validate', () => {
           message: 'Email too long'
         },
         {
-          path: ['username'],
+          path: [],
           type: '',
           context: {
             key: 'username'
           },
           message: 'Username too long'
-        },
-        {
-          path: ['posts', 0, 'title'],
-          type: '',
-          context: {
-            key: 'title'
-          },
-          message: 'Title too long'
         }
       ]
     }
   };
 
-  const expectedErrorData = [
-    { field: validationResult.error.details[0].path, error: validationResult.error.details[0].message + '.'},
-    { field: validationResult.error.details[1].path, error: validationResult.error.details[1].message + '.'},
-    { field: validationResult.error.details[2].path, error: validationResult.error.details[2].message + '.'},
-    { field: validationResult.error.details[3].path, error: validationResult.error.details[3].message + '.'},
-  ];
+  const expectedErrorData = {
+    email: [validationResult.error.details[0].message + '.', validationResult.error.details[1].message + '.'],
+    username: [validationResult.error.details[2].message + '.']
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -136,6 +126,60 @@ describe('validate', () => {
 
     expect(spy).toBeCalledTimes(1);
     expect(spy).toBeCalledWith({}, schema, undefined, true);
+  });
+});
+
+describe('merge validation errors', () => {
+  let error1;
+  let error2;
+  let mergedErrorData;
+
+  beforeEach(() => {
+    error1 = new ValidationError('User', null, {
+      email: ['test', 'sample'],
+      username: ['max', 'format']
+    });
+
+    error2 = new ValidationError('User', null, {
+      email: ['go', 'sample'],
+      name: ['try']
+    });
+
+    mergedErrorData = {
+      email: ['go', 'sample', 'test', 'sample'],
+      username: ['max', 'format'],
+      name: ['try']
+    };
+  });
+
+  it('should return first error when second error is null', () => {
+    const result = mergeValidationErrors(error1, null);
+    expect(result).toStrictEqual(error1);
+  });
+
+  it('should return second error when first error is null', () => {
+    const result = mergeValidationErrors(null, error1);
+    expect(result).toStrictEqual(error1);
+  });
+
+  it('should merge and throw validation errors', () => {
+    try {
+      mergeValidationErrors(error1, error2, true);
+    } catch (err) {
+      const error = err as ValidationError;
+      expect(error.message).toBe(error1.message);
+      expect(error.data).toStrictEqual(mergedErrorData);
+
+      return;
+    }
+
+    fail(new Error('Expected validation error to be thrown.'));
+  });
+
+  it('should merge and return validation errors', () => {
+    const result = mergeValidationErrors(error1, error2);
+    expect(result.message).toBe(error1.message);
+    expect(result.data).toStrictEqual(mergedErrorData);
   });
 });
 
