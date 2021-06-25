@@ -1,0 +1,20 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+  ignore:
+  - dependency-name: apollo-server
+    versions:
+    - 2.21.2
+    - 2.22.1
+    - 2.22.2
+    - 2.23.0
+  - dependency-name: "@types/joi"
+    versions:
+    - 17.2.3
+  - dependency-name: joi
+    versions:
+    - 17.3.0
+    - 17.4.0
